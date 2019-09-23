@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity
                 //클릭한 곳에 위치 이동하기
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
                 //zoom 메서드로 매개변수는 줌 배수를 의미한다.
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(9));
 
             }
         });
