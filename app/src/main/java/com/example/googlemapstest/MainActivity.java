@@ -1,21 +1,24 @@
 package com.example.googlemapstest;
+
 import android.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
-//OnMapClickListener 를 사용하기위한 import
-import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
-//MarkerOption들을 모두 사용할 수 있는 import
 import com.google.android.gms.maps.model.MarkerOptions;
+
+//OnMapClickListener 를 사용하기위한 import
+//MarkerOption들을 모두 사용할 수 있는 import
 
 
 public class MainActivity extends AppCompatActivity
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     //위도 경도 텍스트 박스
     TextView Lat;
     TextView Lng;
+    Button write;
     //onCreate 메서드
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,14 @@ public class MainActivity extends AppCompatActivity
         MapFragment mapFragment = (MapFragment)fragmentManager
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        write = (Button)findViewById(R.id.write);
+        write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), SaveActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //화면에 보여지는 지도 표시
@@ -76,33 +88,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-
     }
 
-    public void oneMarker(){
-        Lat = (TextView)findViewById(R.id.Lat);
-        Lng = (TextView)findViewById(R.id.Lng);
-    }
-    public class MarkerItem{
-        double lat;
-        double lng;
-
-        public MarkerItem(double lat , double lng){
-            this.lat = lat;
-            this.lng = lng;
-        }
-        public double getLat(){
-            return lat;
-        }
-        public double getLng(){
-            return lng;
-        }
-        public void setLat(double lat){
-            this.lat = lat;
-        }
-        public void setLng(double lng){
-            this.lng = lng;
-        }
-    }
 }
